@@ -63,55 +63,55 @@ class SetupMainWindow:
             "btn_icon" : "icon_home.svg",
             "btn_id" : "btn_home",
             "btn_text" : "Home",
-            "btn_tooltip" : "Home page",
+            "btn_tooltip" : "主页",
             "show_top" : True,
             "is_active" : True
         },
         {
+            "btn_icon" : "icon_folder_open.svg",
+            "btn_id" : "btn_open_file",
+            "btn_text" : "Add Users",
+            "btn_tooltip" : "传入扫描路径",
+            "show_top" : True,
+            "is_active" : False
+        },
+         {
             "btn_icon" : "icon_widgets.svg",
             "btn_id" : "btn_widgets",
             "btn_text" : "Show Custom Widgets",
-            "btn_tooltip" : "Show custom widgets",
+            "btn_tooltip" : "显示扫描结果分析",
             "show_top" : True,
             "is_active" : False
         },
-        {
-            "btn_icon" : "icon_add_user.svg",
-            "btn_id" : "btn_add_user",
-            "btn_text" : "Add Users",
-            "btn_tooltip" : "Add users",
-            "show_top" : True,
-            "is_active" : False
-        },
-        {
-            "btn_icon" : "icon_file.svg",
-            "btn_id" : "btn_new_file",
-            "btn_text" : "New File",
-            "btn_tooltip" : "Create new file",
-            "show_top" : True,
-            "is_active" : False
-        },
-        {
-            "btn_icon" : "icon_folder_open.svg",
-            "btn_id" : "btn_open_file",
-            "btn_text" : "Open File",
-            "btn_tooltip" : "Open file",
-            "show_top" : True,
-            "is_active" : False
-        },
-        {
-            "btn_icon" : "icon_save.svg",
-            "btn_id" : "btn_save",
-            "btn_text" : "Save File",
-            "btn_tooltip" : "Save file",
-            "show_top" : True,
-            "is_active" : False
-        },
+        #{
+        #    "btn_icon" : "icon_file.svg",
+        #    "btn_id" : "btn_new_file",
+        #    "btn_text" : "New File",
+        #    "btn_tooltip" : "Create new file",
+        #    "show_top" : True,
+        #    "is_active" : False
+        #},
+        #{
+        #    "btn_icon" : "icon_folder_open.svg",
+        #    "btn_id" : "btn_open_file",
+        #    "btn_text" : "Open File",
+        #    "btn_tooltip" : "Open file",
+        #    "show_top" : True,
+        #    "is_active" : False
+        #},
+        #{
+        #    "btn_icon" : "icon_save.svg",
+        #    "btn_id" : "btn_save",
+        #    "btn_text" : "Save File",
+        #    "btn_tooltip" : "Save file",
+        #    "show_top" : True,
+        #    "is_active" : False
+        #},
         {
             "btn_icon" : "icon_info.svg",
             "btn_id" : "btn_info",
             "btn_text" : "Information",
-            "btn_tooltip" : "Open informations",
+            "btn_tooltip" : "产品信息",
             "show_top" : False,
             "is_active" : False
         },
@@ -119,7 +119,7 @@ class SetupMainWindow:
             "btn_icon" : "icon_settings.svg",
             "btn_id" : "btn_settings",
             "btn_text" : "Settings",
-            "btn_tooltip" : "Open settings",
+            "btn_tooltip" : "设置",
             "show_top" : False,
             "is_active" : False
         }
@@ -141,7 +141,8 @@ class SetupMainWindow:
             "is_active" : False
         }
     ]
-
+    def scan(self):
+        print("scanning")
     # SETUP CUSTOM BTNs OF CUSTOM WIDGETS
     # Get sender() function when btn is clicked
     # ///////////////////////////////////////////////////////////////
@@ -152,6 +153,17 @@ class SetupMainWindow:
             return self.ui.left_menu.sender()
         elif self.ui.left_column.sender() != None:
             return self.ui.left_column.sender()
+
+    # ADD PAGE MENUS
+    # ///////////////////////////////////////////////////////////////
+    # 此处添加的即是可操作的各类控件，使用前需先在此声明，否则仅仅是ui展示，无实际功能
+    add_page3 = [
+        {
+            "btn_id": "scan_btn_1",
+            "btn_tooltip": "开始扫描",
+            "is_active": False
+        }
+    ]
 
     # SETUP MAIN WINDOW WITH CUSTOM PARAMETERS
     # ///////////////////////////////////////////////////////////////
@@ -187,6 +199,8 @@ class SetupMainWindow:
         self.ui.left_menu.clicked.connect(self.btn_clicked)
         self.ui.left_menu.released.connect(self.btn_released)
 
+
+
         # TITLE BAR / ADD EXTRA BUTTONS
         # ///////////////////////////////////////////////////////////////
         # ADD MENUS
@@ -200,12 +214,16 @@ class SetupMainWindow:
         if self.settings["custom_title_bar"]:
             self.ui.title_bar.set_title(self.settings["app_name"])
         else:
-            self.ui.title_bar.set_title("Welcome to PyOneDark")
-
+            self.ui.title_bar.set_title("Welcome to Liliac Virus Killer")
         # LEFT COLUMN SET SIGNALS
         # ///////////////////////////////////////////////////////////////
         self.ui.left_column.clicked.connect(self.btn_clicked)
         self.ui.left_column.released.connect(self.btn_released)
+
+        # GET SIGNALS WHEN PAGE BTN IS CLICKED / RELEASED
+        # ///////////////////////////////////////////////////////////////
+
+
 
         # SET INITIAL PAGE / SET LEFT AND RIGHT COLUMN MENUS
         # ///////////////////////////////////////////////////////////////
@@ -248,7 +266,7 @@ class SetupMainWindow:
 
         # LEFT COLUMN
         # ///////////////////////////////////////////////////////////////
-
+       
         # BTN 1
         self.left_btn_1 = PyPushButton(
             text="Btn 1",
@@ -284,13 +302,13 @@ class SetupMainWindow:
         # ///////////////////////////////////////////////////////////////
 
         # PAGE 1 - ADD LOGO TO MAIN PAGE
-        self.logo_svg = QSvgWidget(Functions.set_svg_image("logo_home.svg"))
+        self.logo_svg = QSvgWidget(Functions.set_svg_image("logo.svg"))
         self.ui.load_pages.logo_layout.addWidget(self.logo_svg, Qt.AlignCenter, Qt.AlignCenter)
 
         # PAGE 2
         # CIRCULAR PROGRESS 1
         self.circular_progress_1 = PyCircularProgress(
-            value = 80,
+            value = 0,
             progress_color = self.themes["app_color"]["context_color"],
             text_color = self.themes["app_color"]["text_title"],
             font_size = 14,
@@ -392,7 +410,6 @@ class SetupMainWindow:
             bg_color_hover = self.themes["app_color"]["dark_three"],
             bg_color_pressed = self.themes["app_color"]["pink"]
         )
-
         # ICON BUTTON 2
         self.icon_button_2 = PyIconButton(
             icon_path = Functions.set_svg_icon("icon_add_user.svg"),
@@ -434,7 +451,7 @@ class SetupMainWindow:
 
         # PUSH BUTTON 1
         self.push_button_1 = PyPushButton(
-            text = "Button Without Icon",
+            text = "开始扫描",
             radius  =8,
             color = self.themes["app_color"]["text_foreground"],
             bg_color = self.themes["app_color"]["dark_one"],
@@ -442,10 +459,12 @@ class SetupMainWindow:
             bg_color_pressed = self.themes["app_color"]["dark_four"]
         )
         self.push_button_1.setMinimumHeight(40)
-
+        self.push_button_1.clicked.connect(lambda: MainFunctions.scan1(
+            self,
+            self.ui.right_column.menu_1))
         # PUSH BUTTON 2
         self.push_button_2 = PyPushButton(
-            text = "Button With Icon",
+            text = "病毒隔离",
             radius = 8,
             color = self.themes["app_color"]["text_foreground"],
             bg_color = self.themes["app_color"]["dark_one"],
@@ -455,10 +474,12 @@ class SetupMainWindow:
         self.icon_2 = QIcon(Functions.set_svg_icon("icon_settings.svg"))
         self.push_button_2.setMinimumHeight(40)
         self.push_button_2.setIcon(self.icon_2)
-
+        self.push_button_2.clicked.connect(lambda: MainFunctions.result_handle(
+            self,
+            self.ui.right_column.menu_1))
         # PY LINE EDIT
         self.line_edit = PyLineEdit(
-            text = "",
+            text = "正在扫描:  D:/malware\samples\lsp\建设-电网20-09天津北辰津霸路220千伏输变电工程\分幅图\acaddoc.lsp",
             place_holder_text = "Place holder text",
             radius = 8,
             border_size = 2,
@@ -500,55 +521,138 @@ class SetupMainWindow:
         # Columns / Header
         self.column_1 = QTableWidgetItem()
         self.column_1.setTextAlignment(Qt.AlignCenter)
-        self.column_1.setText("NAME")
+        self.column_1.setText("恶意文件")
 
         self.column_2 = QTableWidgetItem()
         self.column_2.setTextAlignment(Qt.AlignCenter)
-        self.column_2.setText("NICK")
+        self.column_2.setText("文件属性")
 
         self.column_3 = QTableWidgetItem()
         self.column_3.setTextAlignment(Qt.AlignCenter)
-        self.column_3.setText("PASS")
+        self.column_3.setText("哈希值")
 
         # Set column
         self.table_widget.setHorizontalHeaderItem(0, self.column_1)
         self.table_widget.setHorizontalHeaderItem(1, self.column_2)
         self.table_widget.setHorizontalHeaderItem(2, self.column_3)
+        row_number = self.table_widget.rowCount()
 
-        for x in range(10):
-            row_number = self.table_widget.rowCount()
-            self.table_widget.insertRow(row_number) # Insert row
-            self.table_widget.setItem(row_number, 0, QTableWidgetItem(str("Wanderson"))) # Add name
-            self.table_widget.setItem(row_number, 1, QTableWidgetItem(str("vfx_on_fire_" + str(x)))) # Add nick
-            self.pass_text = QTableWidgetItem()
-            self.pass_text.setTextAlignment(Qt.AlignCenter)
-            self.pass_text.setText("12345" + str(x))
-            self.table_widget.setItem(row_number, 2, self.pass_text) # Add pass
-            self.table_widget.setRowHeight(row_number, 22)
+        self.table_widget.insertRow(row_number) # Insert row
+        self.table_widget.setItem(row_number, 0, QTableWidgetItem(str("acad.fas"))) # Add name
+        self.table_widget.setItem(row_number, 1, QTableWidgetItem(str("fas"))) # Add label
+        self.pass_text = QTableWidgetItem()
+        self.pass_text.setTextAlignment(Qt.AlignCenter)
+        self.pass_text.setText("555bd5cc82206821cf6a746c1125c0314a8d1d5b6d990d9f8ef76e293c1a10a9")
+        self.table_widget.setItem(row_number, 2, self.pass_text) # hash
+        self.table_widget.setRowHeight(row_number, 22)
 
         # ADD WIDGETS
         self.ui.load_pages.row_1_layout.addWidget(self.circular_progress_1)
         self.ui.load_pages.row_1_layout.addWidget(self.circular_progress_2)
         self.ui.load_pages.row_1_layout.addWidget(self.circular_progress_3)
-        self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_1)
-        self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_2)
-        self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_3)
-        self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_4)
-        self.ui.load_pages.row_3_layout.addWidget(self.icon_button_1)
-        self.ui.load_pages.row_3_layout.addWidget(self.icon_button_2)
-        self.ui.load_pages.row_3_layout.addWidget(self.icon_button_3)
+        #self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_1)
+        #self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_2)
+        #self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_3)
+        #self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_4)
+        #self.ui.load_pages.row_3_layout.addWidget(self.icon_button_1)
+        #self.ui.load_pages.row_3_layout.addWidget(self.icon_button_2)
+        #self.ui.load_pages.row_3_layout.addWidget(self.icon_button_3)
         self.ui.load_pages.row_3_layout.addWidget(self.push_button_1)
         self.ui.load_pages.row_3_layout.addWidget(self.push_button_2)
         self.ui.load_pages.row_3_layout.addWidget(self.toggle_button)
         self.ui.load_pages.row_4_layout.addWidget(self.line_edit)
         self.ui.load_pages.row_5_layout.addWidget(self.table_widget)
 
+        # Page 3
+        # ///////////////////////////////////////////////////////////////
+        self.scan_btn_1 = PyPushButton(
+            text = "开始扫描",
+            radius  =8,
+            color = self.themes["app_color"]["text_foreground"],
+            bg_color = self.themes["app_color"]["dark_one"],
+            bg_color_hover = self.themes["app_color"]["dark_three"],
+            bg_color_pressed = self.themes["app_color"]["dark_four"]
+        )
+        self.scan_btn_1.setMinimumHeight(40)
+        self.scan_btn_1.setMinimumWidth(100)
+        self.ui.load_pages.btn_scan_layout.addWidget(self.scan_btn_1)
+
+        self.fulldisk_btn = PyToggle(
+            width = 50,
+            bg_color = self.themes["app_color"]["dark_two"],
+            circle_color = self.themes["app_color"]["icon_color"],
+            active_color = self.themes["app_color"]["context_color"]
+           )
+        self.fulldisk_btn.setMinimumHeight(40)
+        self.fulldisk_btn.setMaximumWidth(40)
+        self.ui.load_pages.btn_fulldisk_layout.addWidget(self.fulldisk_btn)
+
+        self.CAD_btn = PyToggle(
+            width = 50,
+            bg_color = self.themes["app_color"]["dark_two"],
+            circle_color = self.themes["app_color"]["icon_color"],
+            active_color = self.themes["app_color"]["context_color"]            
+            )
+        self.CAD_btn.setMinimumHeight(40)
+        self.CAD_btn.setMaximumWidth(40)
+        self.ui.load_pages.btn_CAD_layout.addWidget(self.CAD_btn)
+
+        self.dirdisk_btn = PyToggle(
+             width = 50,
+            bg_color = self.themes["app_color"]["dark_two"],
+            circle_color = self.themes["app_color"]["icon_color"],
+            active_color = self.themes["app_color"]["context_color"]             
+            )
+        self.dirdisk_btn.setMinimumHeight(40)
+        self.dirdisk_btn.setMaximumWidth(40)
+        self.ui.load_pages.btn_dirdisk_layout.addWidget(self.dirdisk_btn)
+
+        self.scanning_table = PyTableWidget(
+            radius = 8,
+            color = self.themes["app_color"]["text_foreground"],
+            selection_color = self.themes["app_color"]["context_color"],
+            bg_color = self.themes["app_color"]["bg_two"],
+            header_horizontal_color = self.themes["app_color"]["dark_two"],
+            header_vertical_color = self.themes["app_color"]["bg_three"],
+            bottom_line_color = self.themes["app_color"]["bg_three"],
+            grid_line_color = self.themes["app_color"]["bg_one"],
+            scroll_bar_bg_color = self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color = self.themes["app_color"]["dark_four"],
+            context_color = self.themes["app_color"]["context_color"]
+        )
+        self.scanning_table.setColumnCount(3)
+        self.scanning_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.scanning_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.scanning_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+
+        # Columns / Header
+        self.column_1 = QTableWidgetItem()
+        self.column_1.setTextAlignment(Qt.AlignCenter)
+        self.column_1.setText("恶意文件")
+
+        self.column_2 = QTableWidgetItem()
+        self.column_2.setTextAlignment(Qt.AlignCenter)
+        self.column_2.setText("文件属性")
+
+        self.column_3 = QTableWidgetItem()
+        self.column_3.setTextAlignment(Qt.AlignCenter)
+        self.column_3.setText("哈希值")
+
+        # Set column
+        self.scanning_table.setHorizontalHeaderItem(0, self.column_1)
+        self.scanning_table.setHorizontalHeaderItem(1, self.column_2)
+        self.scanning_table.setHorizontalHeaderItem(2, self.column_3)
+
+
+
+            #self.ui.load_pages.scroll_result_layout.addWidget(self.scanning_table)
+
         # RIGHT COLUMN
         # ///////////////////////////////////////////////////////////////
 
         # BTN 1
         self.right_btn_1 = PyPushButton(
-            text="Show Menu 2",
+            text="通用设置",
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
@@ -562,11 +666,12 @@ class SetupMainWindow:
             self,
             self.ui.right_column.menu_2
         ))
+        #self.right_btn_1.clicked.connect(MainFunctions.scan(self))
         self.ui.right_column.btn_1_layout.addWidget(self.right_btn_1)
 
         # BTN 2
         self.right_btn_2 = PyPushButton(
-            text="Show Menu 1",
+            text="扫描设置",
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],

@@ -20,7 +20,7 @@
 # IMPORT QT CORE
 # ///////////////////////////////////////////////////////////////
 from qt_core import *
-
+from gui.core.functions import *
 # IMPORT SETTINGS
 # ///////////////////////////////////////////////////////////////
 from gui.core.json_settings import Settings
@@ -28,10 +28,15 @@ from gui.core.json_settings import Settings
 # IMPORT STYLES
 # ///////////////////////////////////////////////////////////////
 from . styles import Styles
-
+# IMPORT BUTTONS
+from  .py_page_button import PyPageButton
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
 class PyWindow(QFrame):
+
+    clicked = Signal(object)
+    released = Signal(object)
+
     def __init__(
         self,
         parent,
@@ -139,4 +144,42 @@ class PyWindow(QFrame):
             _text_color = internal_text_color,
             _text_font = internal_text_font
         ))
-        
+
+    def add_pages(self, parameters):
+        if parameters != None:
+            for parameter in parameters:
+                _btn_icon = parameter['btn_icon']
+                _btn_id = parameter['btn_id']
+                _btn_text = parameter['btn_text']
+                _btn_tooltip = parameter['btn_tooltip']
+                _show_top = parameter['show_top']
+                _is_active = parameter['is_active']
+
+                self.page = PyPageButton(
+                    self._app_parent,
+                    text=_btn_text,
+                    btn_id=_btn_id,
+                    tooltip_text=_btn_tooltip,
+                    dark_one=self._dark_one,
+                    dark_three=self._dark_three,
+                    dark_four=self._dark_four,
+                    bg_one=self._bg_one,
+                    icon_color=self._icon_color,
+                    icon_color_hover=self._icon_color_active,
+                    icon_color_pressed=self._icon_color_pressed,
+                    icon_color_active=self._icon_color_active,
+                    context_color=self._context_color,
+                    text_foreground=self._text_foreground,
+                    text_active=self._text_active,
+                    icon_path=_btn_icon,
+                    is_active=_is_active
+                )
+                self.page.clicked.connect(self.btn_clicked)
+                self.page.released.connect(self.btn_released)
+
+    def btn_clicked(self):
+        self.clicked.emit(self.page)
+
+    def btn_released(self):
+        self.released.emit(self.page)
+

@@ -45,6 +45,8 @@ os.environ["QT_FONT_DPI"] = "96"
 # MAIN WINDOW
 # ///////////////////////////////////////////////////////////////
 class MainWindow(QMainWindow):
+
+
     def __init__(self):
         super().__init__()
 
@@ -84,6 +86,8 @@ class MainWindow(QMainWindow):
         top_settings = MainFunctions.get_title_bar_btn(self, "btn_top_settings")
         top_settings.set_active(False)
 
+        # Remove Toggle Selection
+
         # LEFT MENU
         # ///////////////////////////////////////////////////////////////
         
@@ -103,13 +107,15 @@ class MainWindow(QMainWindow):
             # Load Page 2
             MainFunctions.set_page(self, self.ui.load_pages.page_2)
 
-        # LOAD USER PAGE
-        if btn.objectName() == "btn_add_user":
+        # LOAD SCAN PAGE
+        if btn.objectName() == "btn_open_file":
             # Select Menu
             self.ui.left_menu.select_only_one(btn.objectName())
-
-            # Load Page 3 
+            # Load Page 3
+            MainFunctions.get_malware_path(self)
             MainFunctions.set_page(self, self.ui.load_pages.page_3)
+            # 传入扫描路径
+
 
         # BOTTOM INFORMATION
         if btn.objectName() == "btn_info":
@@ -133,7 +139,7 @@ class MainWindow(QMainWindow):
                 MainFunctions.set_left_column_menu(
                     self, 
                     menu = self.ui.left_column.menus.menu_2,
-                    title = "Info tab",
+                    title = "开发者信息",
                     icon_path = Functions.set_svg_icon("icon_info.svg")
                 )
 
@@ -156,13 +162,19 @@ class MainWindow(QMainWindow):
                 MainFunctions.set_left_column_menu(
                     self, 
                     menu = self.ui.left_column.menus.menu_1,
-                    title = "Settings Left Column",
+                    title = "系统设置",
                     icon_path = Functions.set_svg_icon("icon_settings.svg")
                 )
         
         # TITLE BAR MENU
         # ///////////////////////////////////////////////////////////////
         
+        #SCAN PAGE FUNCTION
+        #///////////////////////////////////////////////////////////////
+        if btn.objectName() == "scan_btn_1":
+            print(f"Scanning")
+
+
         # SETTINGS TITLE BAR
         if btn.objectName() == "btn_top_settings":
             # Toogle Active
@@ -205,8 +217,6 @@ class MainWindow(QMainWindow):
     def mousePressEvent(self, event):
         # SET DRAG POS WINDOW
         self.dragPos = event.globalPos()
-
-
 # SETTINGS WHEN TO START
 # Set the initial class and also additional parameters of the "QApplication" class
 # ///////////////////////////////////////////////////////////////

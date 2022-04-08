@@ -131,9 +131,9 @@ class Ui_LeftColumn(object):
 
     def retranslateUi(self, LeftColumn):
         LeftColumn.setWindowTitle(QCoreApplication.translate("LeftColumn", u"Form", None))
-        self.label_1.setText(QCoreApplication.translate("LeftColumn", u"Menu 1 - Left Menu", None))
-        self.label_2.setText(QCoreApplication.translate("LeftColumn", u"Menu 2 - Left Menu", None))
-        self.label_3.setText(QCoreApplication.translate("LeftColumn", u"This is just an example menu.\n"
-"Add Qt Widgets or your custom widgets here.", None))
+        self.label_1.setText(QCoreApplication.translate("LeftColumn", u"Setting", None))
+        self.label_2.setText(QCoreApplication.translate("LeftColumn", u"Liliac Virus Killer", None))
+        self.label_3.setText(QCoreApplication.translate("LeftColumn", u"本软件由NKAMG开发，版权所有.\n"
+"竭诚为您服务.", None))
     # retranslateUi
 

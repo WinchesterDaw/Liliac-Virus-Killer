@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\gui",
+    "\\gui\\uis",
+    "\\gui\\uis\\windows",
+    "\\gui\\uis\\windows\\main_window",
+    "\\gui\\widgets",
+    "\\gui\\widgets\\py_table_widget",
+    "\\gui\\widgets\\py_title_bar",
+    "\\gui\\widgets\\py_toggle",
+    "\\gui\\widgets\\py_window"
+  ],
+  "SelectedNode": "\\gui\\uis\\windows\\main_window\\functions_main_window.py",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,25 +1,14 @@
-# PyOneDark Qt Widgets Modern GUI - With PySide6
+# Liliac Virus Killer
+Liliac Virus Killer is an AntiMalwareTool based on PyOneDark and Yara.
 
-![PyOneDark - Capa](https://user-images.githubusercontent.com/60605512/127739671-653eccb8-49da-4244-ae48-a8ae9b9b6fb2.png)
+![image](Ui主界面.png)
 
-> ## :gift: **//// DONATE ////**
-> ## 🔗 Donate (Gumroad): https://gum.co/mHsRC
-> This interface is free for any use, but if you are going to use it commercially, consider helping to maintain this project and others with a donation by Gumroado at the link above. This helps to keep this and other projects active.
+本项目主要基于Yara引擎对CAD软件中的恶意脚本病毒进行检测、隔离和清除工作。
 
-> **Warning**: this project was created using PySide6 and Python 3.9, using previous versions can cause compatibility problems.
+项目中包含由YarGen算法学习生成的恶意文件匹配规则，可供进行传入文件的识别。
 
-# YouTube - Presentation And Tutorials
-Presentation and tutorial video with the main functions of the user interface.
-> 🔗 Presentation - https://youtu.be/1v5errwE8ew
+查找到可疑文件后，会将文件进行隔离操作，可选择彻底清除或还原并移入白名单。
 
-> 🔗 Trailer - https://youtu.be/EJ8XApAl4aw
+![image](UI功能界面.png)
 
-> **TUTORIALS:**
-
-> Tutorial 01: https://youtu.be/QQGlTGYCMg0
-
-> Tutorial 02: https://youtu.be/LwKre2proDk
-
-> Tutorial 03: https://youtu.be/eUT4J9Ukg8g
-
-> Simple Text Editor - https://youtu.be/v7nh_bSumNQ
+此项目为AutoCAD-AntiMalware的用户版本，可供外网环境使用。

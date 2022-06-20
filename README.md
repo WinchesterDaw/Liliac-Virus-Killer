@@ -1,7 +1,7 @@
 # Liliac Virus Killer
 Liliac Virus Killer is an AntiMalwareTool based on PyOneDark and Yara.
 
-![image](UI0.png)
+![Alt text](https://github.com/WinchesterDaw/Liliac-Virus-Killer/blob/master/UI0.png)
 
 本项目主要基于Yara引擎对CAD软件中的恶意脚本病毒进行检测、隔离和清除工作。
 
@@ -9,6 +9,5 @@ Liliac Virus Killer is an AntiMalwareTool based on PyOneDark and Yara.
 
 查找到可疑文件后，会将文件进行隔离操作，可选择彻底清除或还原并移入白名单。
 
-![image](UI.png)
-
+![Alt text](https://github.com/WinchesterDaw/Liliac-Virus-Killer/blob/master/UI.png)
 此项目为AutoCAD-AntiMalware的用户版本，可供外网环境使用。
